@@ -28,20 +28,21 @@ message CommandLong {
 }
 
 message SendCommandLongResponse {
-    CommandAck ack = 1;
+    CommandResult command_result = 1;
 }
 
-message CommandAck {
+message CommandResult {
     enum Result {
-        MAV_RESULT_ACCEPTED=0;
-        MAV_RESULT_TEMPORARILY_REJECTED=1;
-        MAV_RESULT_DENIED=2;
-        MAV_RESULT_UNSUPPORTED=3;
-        MAV_RESULT_FAILED=4;
-        MAV_RESULT_IN_PROGRESS=5;
-        MAV_RESULT_CANCELLED=6;
+        RESULT_ACCEPTED=0;
+        RESULT_TEMPORARILY_REJECTED=1;
+        RESULT_DENIED=2;
+        RESULT_UNSUPPORTED=3;
+        RESULT_FAILED=4;
+        RESULT_IN_PROGRESS=5;
+        RESULT_CANCELLED=6;
+        RESULT_NO_SYSTEM=7;
     }
 
-    uint32 command=1;
-    Result result=2;
+    Result result=1;
+    string result_str = 2;
 }
