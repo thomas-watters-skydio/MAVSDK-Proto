@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package mavsdk.rpc.poi;
+
+import "mavsdk_options.proto";
+
+option java_package = "io.mavsdk.poi";
+option java_outer_classname = "PoiProto";
+
+/*
+ * Allow users to get poi information
+ */
+service PoiService {
+    // Subscribe to 'poi' updates.
+    rpc SubscribePoiReport(SubscribePoiReportRequest) returns(stream PoiReportResponse) {}
+}
+
+message SubscribePoiReportRequest {}
+message PoiReportResponse {
+    PoiReport report = 1;
+}
+
+message PoiReport {
+    uint64 uid = 1;
+    uint64 time_utc_detected = 2; 
+    uint64 time_utc_updated = 3;
+    uint32 time_boot_ms = 4;
+    int32 latitude = 5;
+    int32 longitude = 6;
+    float alt_msl = 7;
+    float alt_ellip = 8;
+    float alt_ground = 9;
+    uint32 classification = 10;
+    float x = 11;
+    float y = 12;
+    float z = 13;
+    repeated float q = 14;
+    float dist = 15;
+    float vel_n = 16;
+    float vel_e = 17;
+    float vel_d = 18;
+    float hdg = 19;
+    float height = 20;
+    float width = 21;
+    float depth = 22;
+    repeated float approach_vector_start = 23;
+    repeated float approach_vector_end = 24;
+    repeated float approach_velocity = 25;
+    uint32 ttl = 26; // actually uint16
+    uint32 confidence_overall = 27; // actually uint8
+    uint32 confidence_detection = 28; // actually uint8
+    uint32 confidence_classification = 29; // actually uint8
+    uint32 confidence_localization = 30; // actually uint8
+    uint32 status_flags = 31; // actually uint8
+    uint32 geometry = 32; // actually uint8
+    string name = 33; // 32 byte string
+    string app6_symbol = 34; // 31 byte string
+}

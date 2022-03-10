@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package mavsdk.rpc.command;
+
+option java_package = "io.mavsdk.command";
+option java_outer_classname = "CommandProto";
+
+service CommandService {
+    rpc SendCommandLong(CommandLongRequest) returns(CommandLongResponse) {}
+}
+
+message CommandLongRequest {
+    CommandLong command = 1;
+}
+
+message CommandLong {
+    uint32 target_system=1; // actually uint8
+    uint32 target_component=2; // actually uint8
+    uint32 command=3; // actually uint16
+    uint32 confirmation=4; // actually uint8
+    float param1 = 5; // PARAM1, see MAV_CMD enum
+    float param2 = 6; // PARAM2, see MAV_CMD enum
+    float param3 = 7; // PARAM3, see MAV_CMD enum
+    float param4 = 8; // PARAM4, see MAV_CMD enum
+    float param5 = 9; // PARAM5, see MAV_CMD enum
+    float param6 = 10; // PARAM6, see MAV_CMD enum
+    float param7 = 11; // PARAM7, see MAV_CMD enum
+}
+
+message CommandLongResponse {
+    CommandAck ack = 1;
+}
+
+message CommandAck {
+    enum Result {
+        MAV_RESULT_ACCEPTED=0;
+        MAV_RESULT_TEMPORARILY_REJECTED=1;
+        MAV_RESULT_DENIED=2;
+        MAV_RESULT_UNSUPPORTED=3;
+        MAV_RESULT_FAILED=4;
+        MAV_RESULT_IN_PROGRESS=5;
+        MAV_RESULT_CANCELLED=6;
+    }
+
+    uint32 command=1;
+    Result result=2;
+}
