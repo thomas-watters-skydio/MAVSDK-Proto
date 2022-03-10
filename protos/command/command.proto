@@ -6,10 +6,10 @@ option java_package = "io.mavsdk.command";
 option java_outer_classname = "CommandProto";
 
 service CommandService {
-    rpc SendCommandLong(CommandLongRequest) returns(CommandLongResponse) {}
+    rpc SendCommandLong(SendCommandLongRequest) returns(SendCommandLongResponse) {}
 }
 
-message CommandLongRequest {
+message SendCommandLongRequest {
     CommandLong command = 1;
 }
 
@@ -27,7 +27,7 @@ message CommandLong {
     float param7 = 11; // PARAM7, see MAV_CMD enum
 }
 
-message CommandLongResponse {
+message SendCommandLongResponse {
     CommandAck ack = 1;
 }
 
