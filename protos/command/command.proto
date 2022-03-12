@@ -33,14 +33,19 @@ message SendCommandLongResponse {
 
 message CommandResult {
     enum Result {
-        RESULT_ACCEPTED=0;
-        RESULT_TEMPORARILY_REJECTED=1;
-        RESULT_DENIED=2;
-        RESULT_UNSUPPORTED=3;
-        RESULT_FAILED=4;
-        RESULT_IN_PROGRESS=5;
-        RESULT_CANCELLED=6;
-        RESULT_NO_SYSTEM=7;
+        RESULT_UNKNOWN = 0; // Unknown result
+        RESULT_SUCCESS = 1; // Request was successful
+        RESULT_NO_SYSTEM = 2; // No system is connected
+        RESULT_CONNECTION_ERROR = 3; // Connection error
+        RESULT_BUSY = 4; // Vehicle is busy
+        RESULT_COMMAND_DENIED = 5; // Command refused by vehicle
+        RESULT_COMMAND_DENIED_LANDED_STATE_UNKNOWN = 6; // Command refused because landed state is unknown
+        RESULT_COMMAND_DENIED_NOT_LANDED = 7; // Command refused because vehicle not landed
+        RESULT_TIMEOUT = 8; // Request timed out
+        RESULT_VTOL_TRANSITION_SUPPORT_UNKNOWN = 9; // Hybrid/VTOL transition support is unknown
+        RESULT_NO_VTOL_TRANSITION_SUPPORT = 10; // Vehicle does not support hybrid/VTOL transitions
+        RESULT_PARAMETER_ERROR = 11; // Error getting or setting parameter
+        RESULT_UNSUPPORTED = 12; // Action not supported
     }
 
     Result result=1;
